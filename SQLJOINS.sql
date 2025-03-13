@@ -107,4 +107,37 @@ select customer_id, YEAR(order_date), COUNT(order_id) order_count from sales.ord
 
  select category_id, MAX(list_price) max_list_price, MIN(list_price) min_list_price from production.products group by category_id having MAX(list_price) > 4000 OR Min (list_price) < 500;
 
- select category_id, avg (list_price) avg_list_price from production.products group by category_id having avg(list_price) Between 400 and 1000;
+ select category_id, avg (list_price) avg_list_price from production.products group by category_id having avg(list_price) Between 500 and 1000;
+
+ select category_id ,list_price from production.products where category_id In(2,3)
+
+ --union operator
+ select first_name, last_name from sales.staffs 
+ union 
+ select first_name, last_name from sales.customers
+
+ select COUNT(*) from sales.staffs 
+
+ --union all 
+select first_name, last_name from sales.staffs
+UNION All 
+Select first_name, last_name from sales.customers
+
+--union all 
+
+select first_name, last_name from sales.staffs
+union all 
+select first_name, last_name from sales.customers
+order by first_name, last_name
+
+use customerDb;
+
+select city from sales.customers 
+Intersect 
+select city from sales.stores
+order by city
+
+-- except operator
+select product_id from production.products
+EXCEPT 
+SELECT product_id from sales.order_items
